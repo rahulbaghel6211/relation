@@ -40,13 +40,14 @@ app.get("/book",async(req,res)=>{
 
     try {
         const book=await book.find().lean().exec();
-        return res.status(200).send({book:book})
+        return res.status(201).send({book:book})
         
     } catch (error) {
-        return res.status(500).send({message:"worng"})
+        return res.status(501).send({message:"worng"})
         
     }
 })
+
 
 app.get("/author",async(req,res)=>{
 
@@ -59,6 +60,18 @@ app.get("/author",async(req,res)=>{
         
     }
 })
+app.post("/author",async(req,res)=>{
+
+    try {
+        const author=await author.findofOne().lean().exec();
+        return res.status(202).send({author:author})
+        
+    } catch (error) {
+        return res.status(502).send({message:"worng"})
+        
+    }
+})
+
 
 app.listen(9989,async()=>{
     try {
